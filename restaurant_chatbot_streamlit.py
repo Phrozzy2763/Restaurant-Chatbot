@@ -3,7 +3,6 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
@@ -17,14 +16,12 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).resolve().parent
-ENV_FILE = BASE_DIR / "key.env"
 MENU_FILE = BASE_DIR / "menu.csv"
 
 # ============================================================
 # 2. API KEY
 # ============================================================
-load_dotenv(ENV_FILE)
-api_key = os.getenv("GOOGLE_API_KEY")
+api_key = st.secrets.get("GOOGLE_API_KEY")
 
 st.title("🍽️ Trợ lý ảo nhà hàng")
 st.caption("Chatbot sử dụng Gemini và dữ liệu từ menu.csv")
