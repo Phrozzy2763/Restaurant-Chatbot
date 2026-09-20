@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
-from google import genai
+import google.generativeai as genai
 from google.genai import types
 
 # ============================================================
@@ -55,13 +55,13 @@ if menu_df.empty:
 menu_text = menu_df.to_string(index=False)
 
 # ============================================================
-# 4. TẠO GEMINI CLIENT
+# 4. TẠO GEMINI MODEL
 # ============================================================
 try:
-    client = genai.Client(api_key=api_key)
+    model = genai.Model(api_key=api_key)
 except Exception as e:
-    st.error(f"Không thể tạo Gemini client: {e}")
-    st.stop()
+    st.error(f"Không thể tạo Gemini model: {e}")
+    st.stop()  
 
 # Có thể đặt GEMINI_MODEL trong key.env.
 # Ví dụ: GEMINI_MODEL=gemini-3.6-flash
